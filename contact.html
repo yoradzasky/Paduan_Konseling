@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hubungi Admin - Padu Konseling</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* --- RESET & GLOBAL --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #F9F8F2 0%, #E8F0E8 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #333;
+        }
+
+        /* --- CARD CONTAINER --- */
+        .contact-card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 480px;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+            border: 1px solid rgba(255,255,255,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #8FBC8F, #1B263B);
+        }
+
+        /* --- HEADER --- */
+        .contact-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .contact-header h2 {
+            font-family: 'Merriweather', serif;
+            color: #1B263B;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .contact-header p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* --- FORM ELEMENTS --- */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1B263B;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
+        }
+
+        .simple-input, .simple-select, .simple-textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1.5px solid #E5E7EB;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            background-color: #FDFDFD;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .simple-input::placeholder, .simple-textarea::placeholder {
+            color: #aaa;
+        }
+
+        .simple-input:focus, .simple-select:focus, .simple-textarea:focus {
+            outline: none;
+            border-color: #0E4D45;
+            background-color: #fff;
+            box-shadow: 0 0 0 4px rgba(14, 77, 69, 0.1);
+        }
+
+        .simple-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* --- BUTTON --- */
+        .btn-send {
+            width: 100%;
+            background-color: #0E4D45;
+            color: #fff;
+            padding: 16px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(14, 77, 69, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-send:hover {
+            background-color: #093832;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(14, 77, 69, 0.4);
+        }
+
+        .btn-send:active {
+            transform: translateY(0);
+        }
+
+        /* --- FOOTER LINKS --- */
+        .footer-link {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .back-link {
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .back-link:hover { color: #0E4D45; }
+
+        .cta-register {
+            margin-top: 5px;
+            font-size: 0.85rem;
+            color: #888;
+        }
+        
+        .cta-register a {
+            color: #0E4D45;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        
+        .cta-register a:hover { text-decoration: underline; }
+
+        @media (max-width: 480px) {
+            .contact-card {
+                padding: 25px;
+                border-radius: 20px;
+            }
+            .contact-header h2 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contact-card">
+        <div class="contact-header">
+            <h2>Hubungi Admin</h2>
+            <p>Punya pertanyaan? Isi form di bawah, kami akan membalas via WhatsApp.</p>
+        </div>
+
+        <form onsubmit="kirimPesanSingkat(event)">
+            
+            <div class="form-group">
+                <label class="form-label">Nama Lengkap</label>
+                <input type="text" id="tanya_nama" class="simple-input" placeholder="Contoh: Budi Santoso" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Nomor Hp</label>
+                <input type="tel" id="tanya_nomor" class="simple-input" placeholder="Contoh: 08123456789" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Topik Pertanyaan</label>
+                <select id="tanya_topik" class="simple-select">
+                    <option value="Umum">Tanya Info Umum</option>
+                    <option value="Jadwal">Cek Ketersediaan Jadwal</option>
+                    <option value="Biaya">Info Biaya & Paket</option>
+                    <option value="Konseling">Tentang Metode Konseling</option>
+                    <option value="Akupunktur">Tentang Terapi Akupunktur</option>
+                    <option value="Lainnya">Lainnya</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Pesan / Pertanyaan</label>
+                <textarea id="tanya_pesan" class="simple-textarea" placeholder="Tuliskan detail pertanyaan Anda di sini..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn-send">Kirim Pesan</button>
+        </form>
+
+        <div class="footer-link">
+            <a href="index.html" class="back-link">← Kembali ke Beranda</a>
+            <div class="cta-register">
+                Sudah yakin ingin konseling? <a href="appointment.html">Daftar di sini</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function kirimPesanSingkat(e) {
+            e.preventDefault();
+
+            // 1. Ambil Data
+            const nama = document.getElementById('tanya_nama').value;
+            const nomor = document.getElementById('tanya_nomor').value;
+            const topik = document.getElementById('tanya_topik').value;
+            const pesan = document.getElementById('tanya_pesan').value;
+
+            const nomorAdmin = "62895611926549"; 
+
+            // 2. Format Pesan
+            const teksWA = 
+`Halo Admin Padu Konseling,
+
+Perkenalkan saya *${nama}*.
+Saya ingin bertanya seputar *${topik}*.
+
+"${pesan}"
+
+Terima kasih.
+${nomor ? `(No HP Saya: ${nomor})` : ''}`;
+
+            const url = `https://wa.me/${nomorAdmin}?text=${encodeURIComponent(teksWA)}`;
+            
+            // 3. Buka WhatsApp di Tab Baru
+            window.open(url, '_blank');
+
+            // 4. Redirect Otomatis ke Beranda setelah 1 detik
+            setTimeout(function() {
+                window.location.href = "index.html";
+            }, 1000);
+        }
+    </script>
+
+</body>
+</html>
