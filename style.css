@@ -1,0 +1,930 @@
+/* =========================================
+   1. VARIABEL & RESET
+   ========================================= */
+:root {
+    --sage-green: #8FBC8F;
+    --sage-pale: #E8F0E8;
+    --warm-beige: #F9F8F2;
+    --navy-blue: #1B263B;
+    --white: #FFFFFF;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--navy-blue);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, .logo {
+    font-family: 'Merriweather', serif;
+}
+
+/* =========================================
+   2. ANIMASI & UTILITY
+   ========================================= */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================
+   3. HEADER & HAMBURGER MENU
+   ========================================= */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5%;
+    background-color: var(--white);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--navy-blue);
+    z-index: 1001; /* Supaya logo tetap di atas menu mobile */
+}
+
+/* Hamburger Icon (Hidden di Desktop) */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    z-index: 1001; /* Supaya tombol tetap bisa diklik */
+    margin-left: auto;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+    background-color: var(--navy-blue);
+}
+
+/* Animasi Hamburger menjadi X */
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+.hamburger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    align-items: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--navy-blue);
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: var(--sage-green);
+}
+
+.btn-nav {
+    border: 2px solid var(--navy-blue);
+    padding: 0.5rem 1.5rem;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.btn-nav:hover {
+    background-color: var(--navy-blue);
+    color: var(--white);
+}
+
+/* =========================================
+   4. HERO SECTION
+   ========================================= */
+.hero {
+    background-color: var(--warm-beige);
+    display: flex;
+    align-items: center;
+    padding: 6rem 5% 4rem;
+    min-height: 90vh;
+    scroll-margin-top: 80px;
+}
+
+.hero-content {
+    flex: 1;
+    padding-right: 3rem;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    max-width: 90%;
+}
+
+.btn-primary {
+    background-color: var(--sage-green);
+    color: var(--white);
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    display: inline-block;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-3px);
+}
+
+.hero-images-wrapper {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.hero-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+}
+
+.hero-img-box {
+    width: 100%;
+    height: 450px;
+    background-color: #ddd;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.hero-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.hero-img-box:hover img {
+    transform: scale(1.05);
+}
+
+.hero-caption {
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--navy-blue);
+    font-size: 0.9rem;
+}
+
+/* =========================================
+   5. PROBLEM SECTION
+   ========================================= */
+.problem-section {
+    background-color: var(--white);
+    padding: 6rem 5%;
+    text-align: center;
+    scroll-margin-top: 80px;
+}
+
+.problem-section h2 {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+}
+
+.grid-4 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.problem-card {
+    padding: 1.5rem;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    transition: transform 0.3s;
+}
+
+.problem-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--sage-green);
+}
+
+.icon-placeholder {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--sage-green);
+}
+
+.quote-italic {
+    margin-top: 3rem;
+    font-style: italic;
+    color: var(--sage-green);
+    font-weight: 600;
+}
+
+/* =========================================
+   6. SERVICES SECTION
+   ========================================= */
+.services-section {
+    background-color: var(--sage-pale);
+    padding: 6rem 5%;
+    scroll-margin-top: 80px;
+}
+
+.services-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.services-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--navy-blue);
+}
+
+.services-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: stretch;
+}
+
+.service-box {
+    background-color: var(--white);
+    padding: 3rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+    border-top: 5px solid var(--sage-green);
+}
+
+.service-box:hover {
+    transform: translateY(-10px);
+}
+
+.service-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    padding: 1rem;
+    background-color: var(--warm-beige);
+    border-radius: 50%;
+    color: var(--navy-blue);
+}
+
+.service-box h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--navy-blue);
+}
+
+.service-box p {
+    color: #555;
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+}
+
+.service-list {
+    list-style: none;
+    margin-top: 1.5rem;
+}
+
+.service-list li {
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: var(--navy-blue);
+    font-weight: 500;
+}
+
+.check-icon {
+    color: var(--sage-green);
+    font-weight: bold;
+}
+
+/* =========================================
+   7. ABOUT SECTION (TENTANG SAYA)
+   ========================================= */
+.about-section {
+    background-color: var(--white);
+    padding: 6rem 5%;
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    scroll-margin-top: 80px;
+}
+
+.about-image {
+    flex: 0 0 400px;
+    height: 400px;
+    background-color: #ccc;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+}
+
+.about-text {
+    flex: 1;
+}
+
+.cert-list {
+    margin-top: 1.5rem;
+    list-style: none;
+}
+
+.cert-list li {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+}
+
+/* =========================================
+   8. FLOW SECTION
+   ========================================= */
+.flow-section {
+    padding: 6rem 5%;
+    background-color: var(--white);
+    scroll-margin-top: 80px;
+}
+
+.flow-container {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 3rem;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+}
+
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+    text-align: left;
+}
+
+.step-number {
+    font-family: 'Merriweather', serif;
+    font-size: 3rem;
+    color: var(--sage-green);
+    opacity: 0.5;
+    margin-bottom: 0.5rem;
+}
+
+/* =========================================
+   9. TESTIMONI SECTION
+   ========================================= */
+.testi-section {
+    background-color: var(--warm-beige);
+    padding: 6rem 5%;
+    text-align: center;
+}
+
+.testi-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--navy-blue);
+}
+
+.testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.testi-card {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    text-align: left;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.testi-card:hover {
+    transform: translateY(-10px);
+}
+
+.quote-icon {
+    font-size: 3rem;
+    font-family: serif;
+    color: var(--sage-green);
+    opacity: 0.3;
+    line-height: 1;
+    margin-bottom: -1rem;
+}
+
+.testi-text {
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    color: #555;
+    font-size: 1rem;
+}
+
+.client-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.client-avatar {
+    width: 50px;
+    height: 50px;
+    background-color: var(--sage-pale);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: var(--sage-green);
+}
+
+.client-details h4 {
+    font-size: 1rem;
+    color: var(--navy-blue);
+    margin-bottom: 0.2rem;
+}
+
+.client-details span {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+/* =========================================
+   10. APPOINTMENT FORM PAGE
+   ========================================= */
+.booking-section {
+    background-color: var(--warm-beige);
+    padding: 6rem 5%;
+    min-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.booking-container {
+    background-color: var(--white);
+    padding: 3rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    width: 100%;
+    max-width: 600px;
+    margin-top: 2rem;
+}
+
+.booking-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.booking-header h2 {
+    color: var(--navy-blue);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.booking-header p {
+    color: #666;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--navy-blue);
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--sage-green);
+    box-shadow: 0 0 0 3px rgba(143, 188, 143, 0.2);
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.btn-submit {
+    width: 100%;
+    background-color: var(--navy-blue);
+    color: var(--white);
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 1rem;
+}
+
+.btn-submit:hover {
+    background-color: #2c3e50;
+    transform: translateY(-2px);
+}
+
+/* =========================================
+   11. FOOTER
+   ========================================= */
+footer {
+    background-color: var(--navy-blue);
+    color: var(--white);
+    padding: 3rem 5%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.footer-left h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.footer-contact p {
+    margin-bottom: 0.5rem;
+}
+
+.copyright {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    font-size: 0.9rem;
+}
+
+/* =========================================
+   12. RESPONSIVE MEDIA QUERIES (MOBILE)
+   ========================================= */
+@media (max-width: 768px) {
+    /* Umum */
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.8rem; }
+    
+    /* Header & Hamburger */
+    header {
+        padding: 1rem 5%;
+    }
+
+    .hamburger {
+        display: block; /* Munculkan hamburger di HP */
+    }
+
+    /* Logic Menu Hamburger */
+    .nav-menu {
+        position: fixed;
+        left: -100%; /* Sembunyikan menu di kiri layar */
+        top: 70px; /* Jarak dari header */
+        gap: 0;
+        flex-direction: column;
+        background-color: var(--white);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+        padding-bottom: 2rem;
+        z-index: 1000;
+    }
+
+    .nav-menu.active {
+        left: 0; /* Munculkan menu */
+    }
+
+    .nav-menu li {
+        margin: 1.5rem 0;
+    }
+
+    /* Sections Padding */
+    .hero, .about-section, .problem-section, .services-section, .flow-section {
+        flex-direction: column;
+        padding: 3rem 5%;
+    }
+
+    /* Hero Images */
+    .hero-images-wrapper {
+        width: 100%;
+        margin-top: 2rem;
+        grid-template-columns: 1fr;
+    }
+    .hero-img-box {
+        height: 300px;
+    }
+
+    /* FIX FOTO ABOUT DI HP (Agar Wajah Tidak Terpotong) */
+    .about-image {
+        width: 100%;
+        flex: auto;
+        height: auto; /* Biarkan tinggi menyesuaikan */
+        aspect-ratio: 1 / 1; /* Paksa jadi kotak di HP agar proporsional */
+        margin-bottom: 2rem;
+    }
+    
+    .about-image img {
+        object-position: top center; /* Fokuskan gambar ke bagian atas (wajah) */
+    }
+
+    /* Services Section */
+    .services-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .service-box {
+        padding: 2rem;
+    }
+
+    /* Booking Form */
+    .booking-container {
+        padding: 1.5rem;
+        margin-top: 1rem;
+    }
+    
+    /* Footer */
+    footer {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+}
+
+        /* --- FAQ SECTION --- */
+    .faq-section {
+        padding: 6rem 5%;
+        background-color: var(--white);
+        scroll-margin-top: 80px;
+    }
+
+    .faq-container {
+        max-width: 800px;
+        margin: 3rem auto 0;
+    }
+
+    .faq-item {
+        margin-bottom: 1rem;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .faq-question {
+        width: 100%;
+        padding: 1.5rem;
+        background: none;
+        border: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        color: var(--navy-blue);
+        text-align: left;
+    }
+
+    .faq-answer {
+        padding: 0 1.5rem;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        background-color: var(--warm-beige);
+    }
+
+    .faq-answer p {
+        padding: 1.5rem 0;
+        color: #555;
+    }
+
+    .faq-item.active .faq-answer {
+        max-height: 200px;
+    }
+
+    /* --- LOKASI SECTION --- */
+    /* --- LOKASI SECTION (PETA DIPERBESAR) --- */
+    .location-section {
+        padding: 6rem 5%;
+        background-color: var(--sage-pale); /* Latar belakang hijau sage pucat [cite: 36] */
+    }
+
+    .location-grid {
+        display: grid;
+        grid-template-columns: 350px 1fr; /* Kolom teks tetap, kolom peta fleksibel (melebar) */
+        gap: 3rem;
+        margin-top: 3rem;
+        align-items: center;
+    }
+
+    .map-container {
+        border-radius: 20px; /* Sudut tumpul [cite: 35] */
+        overflow: hidden;
+        height: 550px; /* Diperbesar dari sebelumnya */
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .location-info h3 {
+        font-family: 'Merriweather', serif; /* Font Serif tebal [cite: 5] */
+        color: var(--navy-blue); /* Warna Navy Blue [cite: 3] */
+        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+    }
+
+    .location-info p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+    }
+
+    /* Responsif untuk layar HP */
+    @media (max-width: 992px) {
+        .location-grid {
+            grid-template-columns: 1fr; /* Menjadi satu kolom saat layar menyempit */
+        }
+        
+        .map-container {
+            height: 400px; /* Tinggi peta disesuaikan untuk layar kecil */
+        }
+        
+        .location-info {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+    }
+
+    /* --- SUCCESS PAGE STYLES --- */
+    .success-container {
+        text-align: center;
+        padding: 10rem 5%;
+        background-color: var(--warm-beige);
+        min-height: 80vh;
+    }
+
+    .success-card {
+        background: var(--white);
+        padding: 3rem;
+        border-radius: 20px;
+        max-width: 500px;
+        margin: 0 auto;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+
+    .success-icon {
+        font-size: 4rem;
+        color: var(--sage-green);
+        margin-bottom: 1.5rem;
+    }
+
+    /* Responsive Maps */
+    @media (max-width: 768px) {
+        .location-grid { grid-template-columns: 1fr; }
+    }
+
+
+
+    /* --- ARTIKEL SECTION --- */
+    .article-section {
+        padding: 6rem 5%;
+        background-color: var(--white);
+        scroll-margin-top: 80px;
+    }
+
+    .article-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .article-card {
+        background: #fff;
+        border: 1px solid #eee;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .article-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .article-img {
+        width: 100%;
+        height: 200px;
+        background-color: #ddd; /* Placeholder warna */
+        object-fit: cover;
+    }
+
+    .article-content {
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .article-tag {
+        font-size: 0.8rem;
+        color: var(--sage-green);
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+    }
+
+    .article-content h3 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        color: var(--navy-blue);
+        line-height: 1.4;
+    }
+
+    .article-content p {
+        font-size: 0.95rem;
+        color: #666;
+        margin-bottom: 1.5rem;
+        flex-grow: 1; /* Mendorong tombol ke bawah rata */
+    }
+
+    .read-more {
+        text-decoration: none;
+        color: var(--navy-blue);
+        font-weight: 600;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        transition: color 0.3s;
+    }
+
+    .read-more:hover {
+        color: var(--sage-green);
+    }
